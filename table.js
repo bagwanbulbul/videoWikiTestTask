@@ -7,12 +7,11 @@ var knex = require('knex')({
       database: 'videoWikiTest'
     },
   })
-knex.schema.createTable('user_register', (table) => {
-    table.increments('user_id'),
-    table.string("name"),
-    table.string("email_id").unique(),
-    table.string("password")
-
+knex.schema.createTable('create_post', (table) => {
+    table.increments('post_id'),
+    table.integer("user_id"),
+    table.string("post"),
+    table.string("caption")
 })
 .then(() => console.log("table created"))
 .catch((err) => { console.log(err); throw err });
