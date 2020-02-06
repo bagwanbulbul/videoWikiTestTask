@@ -4,6 +4,17 @@ editProfile.use(express.json())
 const add = require("../model/edit_profile_db");
 const jwt = require('jsonwebtoken')
 
+editProfile.get("/userName",function(req,res){
+    let user_id = req.body.user_id
+    let response= add.showUserName(user_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        console.log(err)
+        res.json({"massage":"wrong"})
+    })
+})
+
 
 editProfile.post("/profile",function(req,res){
     let user_id = req.body.user_id
@@ -26,7 +37,6 @@ editProfile.post("/profile",function(req,res){
                 .then((data)=>{
                     res.json({"massage":"profile updated","data":data})
                 })
-                // res.json({"status":"write","massage":"login successful ","token":result})
             }) 
         }else{
             console.log("errrrr")
